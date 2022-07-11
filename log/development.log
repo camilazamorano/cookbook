@@ -1,0 +1,1071 @@
+  [1m[35m (107.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (268.8ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (42.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateRecipes (20220628160325)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (21.1ms)[0m  [1m[35mCREATE TABLE "recipes" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "instructions" text, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (30.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20220628160325"]]
+  [1m[36mTRANSACTION (42.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (15.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2022-06-28 16:20:15.606808"], ["updated_at", "2022-06-28 16:20:15.606808"]]
+  [1m[36mTRANSACTION (44.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/recipes/new" for 127.0.0.1 at 2022-06-28 12:21:59 -0400
+  [1m[35m (4.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by RecipesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering recipes/new.html.erb within layouts/application
+  Rendered recipes/_form.html.erb (Duration: 752.6ms | Allocations: 5183)
+  Rendered recipes/new.html.erb within layouts/application (Duration: 802.0ms | Allocations: 5922)
+  Rendered layout layouts/application.html.erb (Duration: 4015.0ms | Allocations: 96236)
+Completed 200 OK in 4648ms (Views: 4214.3ms | ActiveRecord: 3.5ms | Allocations: 105129)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-06-28 12:22:20 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering recipes/index.html.erb within layouts/application
+  [1m[36mRecipe Load (12.7ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/index.html.erb within layouts/application (Duration: 77.9ms | Allocations: 1349)
+  Rendered layout layouts/application.html.erb (Duration: 152.7ms | Allocations: 3813)
+Completed 200 OK in 259ms (Views: 235.4ms | ActiveRecord: 12.7ms | Allocations: 4336)
+
+
+Started GET "/recipes/new" for 127.0.0.1 at 2022-06-28 12:22:23 -0400
+Processing by RecipesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering recipes/new.html.erb within layouts/application
+  Rendered recipes/_form.html.erb (Duration: 4.0ms | Allocations: 1130)
+  Rendered recipes/new.html.erb within layouts/application (Duration: 8.8ms | Allocations: 1242)
+  Rendered layout layouts/application.html.erb (Duration: 99.3ms | Allocations: 3599)
+Completed 200 OK in 126ms (Views: 113.3ms | ActiveRecord: 0.0ms | Allocations: 3888)
+
+
+Started POST "/recipes" for 127.0.0.1 at 2022-06-28 12:24:12 -0400
+Processing by RecipesController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "recipe"=>{"title"=>"Arroz Chino", "instructions"=>"1) prepare 3 tazas de arroz en 5 tazas de agua. Cocine por 25 minutos a fuego bajo. 2) etc 3) etc...."}, "commit"=>"Create Recipe"}
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/recipes_controller.rb:27:in `block in create'
+  [1m[36mRecipe Create (257.5ms)[0m  [1m[32mINSERT INTO "recipes" ("title", "instructions", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["title", "Arroz Chino"], ["instructions", "1) prepare 3 tazas de arroz en 5 tazas de agua. Cocine por 25 minutos a fuego bajo. 2) etc 3) etc...."], ["created_at", "2022-06-28 16:24:12.724408"], ["updated_at", "2022-06-28 16:24:12.724408"]]
+  ↳ app/controllers/recipes_controller.rb:27:in `block in create'
+  [1m[36mTRANSACTION (198.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/recipes_controller.rb:27:in `block in create'
+Redirected to http://localhost:3000/recipes/1
+Completed 302 Found in 792ms (ActiveRecord: 456.5ms | Allocations: 3863)
+
+
+Started GET "/recipes/1" for 127.0.0.1 at 2022-06-28 12:24:13 -0400
+Processing by RecipesController#show as TURBO_STREAM
+  Parameters: {"id"=>"1"}
+  [1m[36mRecipe Load (3.1ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:63:in `set_recipe'
+  Rendering layout layouts/application.html.erb
+  Rendering recipes/show.html.erb within layouts/application
+  Rendered recipes/_recipe.html.erb (Duration: 7.2ms | Allocations: 239)
+  Rendered recipes/show.html.erb within layouts/application (Duration: 115.8ms | Allocations: 1673)
+  Rendered layout layouts/application.html.erb (Duration: 284.1ms | Allocations: 4125)
+Completed 200 OK in 388ms (Views: 298.9ms | ActiveRecord: 3.1ms | Allocations: 6932)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-06-28 12:24:31 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering recipes/index.html.erb within layouts/application
+  [1m[36mRecipe Load (1.1ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/application (Duration: 28.8ms | Allocations: 1117)
+  Rendered layout layouts/application.html.erb (Duration: 150.7ms | Allocations: 3472)
+Completed 200 OK in 165ms (Views: 155.6ms | ActiveRecord: 1.1ms | Allocations: 3798)
+
+
+Started GET "/recipes/new" for 127.0.0.1 at 2022-06-28 12:24:37 -0400
+Processing by RecipesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering recipes/new.html.erb within layouts/application
+  Rendered recipes/_form.html.erb (Duration: 9.5ms | Allocations: 1125)
+  Rendered recipes/new.html.erb within layouts/application (Duration: 15.3ms | Allocations: 1234)
+  Rendered layout layouts/application.html.erb (Duration: 101.0ms | Allocations: 3592)
+Completed 200 OK in 120ms (Views: 112.2ms | ActiveRecord: 0.0ms | Allocations: 3882)
+
+
+Started POST "/recipes" for 127.0.0.1 at 2022-06-28 12:25:08 -0400
+Processing by RecipesController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "recipe"=>{"title"=>"Leche Asada", "instructions"=>"1) paso 2) paso 3) paso 4) paso....."}, "commit"=>"Create Recipe"}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/recipes_controller.rb:27:in `block in create'
+  [1m[36mRecipe Create (30.0ms)[0m  [1m[32mINSERT INTO "recipes" ("title", "instructions", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["title", "Leche Asada"], ["instructions", "1) paso 2) paso 3) paso 4) paso....."], ["created_at", "2022-06-28 16:25:08.485394"], ["updated_at", "2022-06-28 16:25:08.485394"]]
+  ↳ app/controllers/recipes_controller.rb:27:in `block in create'
+  [1m[36mTRANSACTION (47.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/recipes_controller.rb:27:in `block in create'
+Redirected to http://localhost:3000/recipes/2
+Completed 302 Found in 116ms (ActiveRecord: 78.0ms | Allocations: 2449)
+
+
+Started GET "/recipes/2" for 127.0.0.1 at 2022-06-28 12:25:08 -0400
+Processing by RecipesController#show as TURBO_STREAM
+  Parameters: {"id"=>"2"}
+  [1m[36mRecipe Load (0.7ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:63:in `set_recipe'
+  Rendering layout layouts/application.html.erb
+  Rendering recipes/show.html.erb within layouts/application
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 27)
+  Rendered recipes/show.html.erb within layouts/application (Duration: 4.5ms | Allocations: 673)
+  Rendered layout layouts/application.html.erb (Duration: 71.1ms | Allocations: 3018)
+Completed 200 OK in 97ms (Views: 78.0ms | ActiveRecord: 0.7ms | Allocations: 3793)
+
+
+Started GET "/recipes/2/edit" for 127.0.0.1 at 2022-06-28 12:25:12 -0400
+Processing by RecipesController#edit as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mRecipe Load (0.9ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:63:in `set_recipe'
+  Rendering layout layouts/application.html.erb
+  Rendering recipes/edit.html.erb within layouts/application
+  Rendered recipes/_form.html.erb (Duration: 11.3ms | Allocations: 1158)
+  Rendered recipes/edit.html.erb within layouts/application (Duration: 62.5ms | Allocations: 1467)
+  Rendered layout layouts/application.html.erb (Duration: 157.9ms | Allocations: 3834)
+Completed 200 OK in 210ms (Views: 179.4ms | ActiveRecord: 0.9ms | Allocations: 4648)
+
+
+Started PATCH "/recipes/2" for 127.0.0.1 at 2022-06-28 12:25:15 -0400
+Processing by RecipesController#update as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "recipe"=>{"title"=>"Leche Asada", "instructions"=>"1) paso 2) paso 3) paso 4) paso....."}, "commit"=>"Update Recipe", "id"=>"2"}
+  [1m[36mRecipe Load (0.6ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:63:in `set_recipe'
+Redirected to http://localhost:3000/recipes/2
+Completed 302 Found in 32ms (ActiveRecord: 0.6ms | Allocations: 1270)
+
+
+Started GET "/recipes/2" for 127.0.0.1 at 2022-06-28 12:25:15 -0400
+Processing by RecipesController#show as TURBO_STREAM
+  Parameters: {"id"=>"2"}
+  [1m[36mRecipe Load (5.2ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:63:in `set_recipe'
+  Rendering layout layouts/application.html.erb
+  Rendering recipes/show.html.erb within layouts/application
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 27)
+  Rendered recipes/show.html.erb within layouts/application (Duration: 9.9ms | Allocations: 670)
+  Rendered layout layouts/application.html.erb (Duration: 92.7ms | Allocations: 3014)
+Completed 200 OK in 126ms (Views: 104.8ms | ActiveRecord: 5.2ms | Allocations: 3777)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-06-28 12:25:17 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering recipes/index.html.erb within layouts/application
+  [1m[36mRecipe Load (0.6ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 0.5ms | Allocations: 27)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 26)
+  Rendered recipes/index.html.erb within layouts/application (Duration: 16.7ms | Allocations: 1144)
+  Rendered layout layouts/application.html.erb (Duration: 65.8ms | Allocations: 3509)
+Completed 200 OK in 78ms (Views: 70.4ms | ActiveRecord: 0.6ms | Allocations: 3791)
+
+
+Started GET "/recipes/1" for 127.0.0.1 at 2022-06-28 12:25:22 -0400
+Processing by RecipesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mRecipe Load (0.8ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:63:in `set_recipe'
+  Rendering layout layouts/application.html.erb
+  Rendering recipes/show.html.erb within layouts/application
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 27)
+  Rendered recipes/show.html.erb within layouts/application (Duration: 4.8ms | Allocations: 663)
+  Rendered layout layouts/application.html.erb (Duration: 52.9ms | Allocations: 3007)
+Completed 200 OK in 74ms (Views: 59.3ms | ActiveRecord: 0.8ms | Allocations: 3765)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-06-28 12:25:26 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering recipes/index.html.erb within layouts/application
+  [1m[36mRecipe Load (0.7ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 27)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 26)
+  Rendered recipes/index.html.erb within layouts/application (Duration: 28.6ms | Allocations: 1135)
+  Rendered layout layouts/application.html.erb (Duration: 81.5ms | Allocations: 3490)
+Completed 200 OK in 93ms (Views: 86.0ms | ActiveRecord: 0.7ms | Allocations: 3771)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-06-28 12:38:52 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/views/recipes/index.html.erb:6
+  [1m[36mRecipe Load (5.4ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 2.7ms | Allocations: 201)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 26)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 50.4ms | Allocations: 3717)
+  Rendered layout layouts/standard.html.erb (Duration: 586.7ms | Allocations: 29247)
+Completed 200 OK in 625ms (Views: 595.7ms | ActiveRecord: 7.2ms | Allocations: 30883)
+
+
+Started GET "/recipes/new" for 127.0.0.1 at 2022-06-29 11:55:16 -0400
+Started GET "/recipes/new" for 127.0.0.1 at 2022-06-29 11:55:16 -0400
+Started GET "/recipes/new" for 127.0.0.1 at 2022-06-29 11:55:16 -0400
+Started GET "/recipes/new" for 127.0.0.1 at 2022-06-29 11:55:26 -0400
+Processing by RecipesController#new as HTML
+Processing by RecipesController#new as HTML
+Processing by RecipesController#new as HTML
+Processing by RecipesController#new as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/new.html.erb within layouts/standard
+  Rendering layout layouts/standard.html.erb
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/new.html.erb within layouts/standard
+  Rendering recipes/new.html.erb within layouts/standard
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/new.html.erb within layouts/standard
+Started GET "/recipes/new" for 127.0.0.1 at 2022-06-29 11:55:55 -0400
+  Rendered recipes/_form.html.erb (Duration: 7456.5ms | Allocations: 5062)
+  Rendered recipes/_form.html.erb (Duration: 7249.8ms | Allocations: 4738)
+  Rendered recipes/new.html.erb within layouts/standard (Duration: 11524.8ms | Allocations: 6182)
+  Rendered recipes/_form.html.erb (Duration: 7457.8ms | Allocations: 5225)
+  Rendered recipes/new.html.erb within layouts/standard (Duration: 13025.7ms | Allocations: 7046)
+  Rendered recipes/_form.html.erb (Duration: 7382.7ms | Allocations: 4878)
+Processing by RecipesController#new as HTML
+  Rendered recipes/new.html.erb within layouts/standard (Duration: 11665.1ms | Allocations: 6118)
+  Rendered recipes/new.html.erb within layouts/standard (Duration: 12299.6ms | Allocations: 7182)
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/new.html.erb within layouts/standard
+  Rendered recipes/_form.html.erb (Duration: 717.5ms | Allocations: 1467)
+  Rendered layout layouts/standard.html.erb (Duration: 14833.4ms | Allocations: 11629)
+Completed 200 OK in 22470ms (Views: 17250.3ms | Allocations: 12922)
+
+
+  Rendered recipes/new.html.erb within layouts/standard (Duration: 987.8ms | Allocations: 2746)
+  Rendered layout layouts/standard.html.erb (Duration: 15115.7ms | Allocations: 11482)
+Completed 200 OK in 22372ms (Views: 17869.6ms | Allocations: 13430)
+
+
+  Rendered layout layouts/standard.html.erb (Duration: 14678.7ms | Allocations: 12767)
+Completed 200 OK in 23267ms (Views: 18086.4ms | Allocations: 14788)
+
+
+  Rendered layout layouts/standard.html.erb (Duration: 14833.2ms | Allocations: 11637)
+Completed 200 OK in 23458ms (Views: 18933.6ms | Allocations: 16007)
+
+
+  Rendered layout layouts/standard.html.erb (Duration: 2735.9ms | Allocations: 6044)
+Completed 200 OK in 3449ms (Views: 3060.7ms | Allocations: 8484)
+
+
+Started POST "/recipes" for 127.0.0.1 at 2022-06-29 11:56:22 -0400
+Processing by RecipesController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "recipe"=>{"title"=>"Crema de calabaza", "instructions"=>"Cortar la calabaza en trozos y salpimentar.\r\nHornear la calabaza a 180º C hasta que esté blanda.\r\nCaramelizar las cebollas a fuego lento con la mantequilla.\r\nFreir los ajos previamente troceados.\r\nLicuar la calabaza con el ajo y la cebolla. Añadir un poco de agua si es necesario, para que quede la consistencia de crema.\r\nDecorar con las almendras laminadas"}, "commit"=>"Crear Receta"}
+  [1m[35m (21.7ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/recipes_controller.rb:28:in `block in create'
+  [1m[36mTRANSACTION (44.9ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/recipes_controller.rb:28:in `block in create'
+  [1m[36mRecipe Create (98.7ms)[0m  [1m[32mINSERT INTO "recipes" ("title", "instructions", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["title", "Crema de calabaza"], ["instructions", "Cortar la calabaza en trozos y salpimentar.\r\nHornear la calabaza a 180º C hasta que esté blanda.\r\nCaramelizar las cebollas a fuego lento con la mantequilla.\r\nFreir los ajos previamente troceados.\r\nLicuar la calabaza con el ajo y la cebolla. Añadir un poco de agua si es necesario, para que quede la consistencia de crema.\r\nDecorar con las almendras laminadas"], ["created_at", "2022-06-29 15:56:24.533597"], ["updated_at", "2022-06-29 15:56:24.533597"]]
+  ↳ app/controllers/recipes_controller.rb:28:in `block in create'
+  [1m[36mTRANSACTION (97.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/recipes_controller.rb:28:in `block in create'
+Redirected to http://localhost:3000/recipes/3
+Completed 302 Found in 3113ms (ActiveRecord: 386.3ms | Allocations: 3197)
+
+
+Started GET "/recipes/3" for 127.0.0.1 at 2022-06-29 11:56:26 -0400
+Processing by RecipesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mRecipe Load (1.0ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:64:in `set_recipe'
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/show.html.erb within layouts/standard
+  Rendered recipes/_recipe.html.erb (Duration: 136.1ms | Allocations: 28)
+  Rendered recipes/show.html.erb within layouts/standard (Duration: 695.0ms | Allocations: 885)
+  Rendered layout layouts/standard.html.erb (Duration: 1356.2ms | Allocations: 1838)
+Completed 200 OK in 3647ms (Views: 1370.2ms | ActiveRecord: 1.0ms | Allocations: 3305)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-06-29 11:59:15 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[36mRecipe Load (32.8ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 0.3ms | Allocations: 27)
+  Rendered recipes/_recipe.html.erb (Duration: 1.3ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 350.2ms | Allocations: 1332)
+  Rendered layout layouts/standard.html.erb (Duration: 490.4ms | Allocations: 2288)
+Completed 200 OK in 523ms (Views: 476.4ms | ActiveRecord: 32.8ms | Allocations: 2548)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-06-29 12:02:39 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[36mRecipe Load (0.9ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 0.3ms | Allocations: 27)
+  Rendered recipes/_recipe.html.erb (Duration: 0.5ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 99.3ms | Allocations: 1299)
+  Rendered layout layouts/standard.html.erb (Duration: 1488.2ms | Allocations: 3504)
+Completed 200 OK in 1510ms (Views: 1496.4ms | ActiveRecord: 0.9ms | Allocations: 3763)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-06-29 12:04:35 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[36mRecipe Load (5.8ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 0.3ms | Allocations: 27)
+  Rendered recipes/_recipe.html.erb (Duration: 0.4ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.3ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 29.8ms | Allocations: 1314)
+  Rendered layout layouts/standard.html.erb (Duration: 463.0ms | Allocations: 3525)
+Completed 200 OK in 584ms (Views: 525.4ms | ActiveRecord: 5.8ms | Allocations: 3784)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-06-29 12:05:59 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[36mRecipe Load (0.8ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 1.1ms | Allocations: 27)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.5ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 68.0ms | Allocations: 1294)
+  Rendered layout layouts/standard.html.erb (Duration: 360.2ms | Allocations: 3505)
+Completed 200 OK in 447ms (Views: 430.9ms | ActiveRecord: 0.8ms | Allocations: 3764)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-06-29 12:15:31 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/views/recipes/index.html.erb:6
+  [1m[36mRecipe Load (1.0ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 149.2ms | Allocations: 191)
+  Rendered recipes/_recipe.html.erb (Duration: 0.8ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.6ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 1166.6ms | Allocations: 2677)
+  Rendered layout layouts/standard.html.erb (Duration: 1871.7ms | Allocations: 5426)
+Completed 200 OK in 3226ms (Views: 2603.8ms | ActiveRecord: 207.1ms | Allocations: 6208)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-06-29 12:16:28 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[36mRecipe Load (1.0ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 29.9ms | Allocations: 191)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.3ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 241.4ms | Allocations: 2009)
+  Rendered layout layouts/standard.html.erb (Duration: 847.7ms | Allocations: 4632)
+Completed 200 OK in 919ms (Views: 871.0ms | ActiveRecord: 1.0ms | Allocations: 5439)
+
+
+Started GET "/recipes/new" for 127.0.0.1 at 2022-06-29 12:16:44 -0400
+Processing by RecipesController#new as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/new.html.erb within layouts/standard
+  Rendered recipes/_form.html.erb (Duration: 181.8ms | Allocations: 1496)
+  Rendered recipes/new.html.erb within layouts/standard (Duration: 252.2ms | Allocations: 1832)
+  Rendered layout layouts/standard.html.erb (Duration: 304.4ms | Allocations: 2920)
+Completed 200 OK in 324ms (Views: 312.1ms | ActiveRecord: 0.0ms | Allocations: 3268)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-06-29 12:16:48 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[36mRecipe Load (5.1ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 27)
+  Rendered recipes/_recipe.html.erb (Duration: 0.4ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.3ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 64.5ms | Allocations: 1291)
+  Rendered layout layouts/standard.html.erb (Duration: 116.8ms | Allocations: 2259)
+Completed 200 OK in 155ms (Views: 134.1ms | ActiveRecord: 5.1ms | Allocations: 2531)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-06-29 12:23:27 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[35m (5.9ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/views/recipes/index.html.erb:6
+  [1m[36mRecipe Load (0.8ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 2.7ms | Allocations: 191)
+  Rendered recipes/_recipe.html.erb (Duration: 0.9ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.6ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 379.6ms | Allocations: 2674)
+  Rendered layout layouts/standard.html.erb (Duration: 761.1ms | Allocations: 3954)
+Completed 200 OK in 1318ms (Views: 1300.5ms | ActiveRecord: 97.5ms | Allocations: 4768)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-06-29 12:27:07 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[36mRecipe Load (0.7ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 72.7ms | Allocations: 191)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 4.7ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 453.8ms | Allocations: 2004)
+  Rendered layout layouts/standard.html.erb (Duration: 652.1ms | Allocations: 3280)
+Completed 200 OK in 858ms (Views: 837.0ms | ActiveRecord: 0.7ms | Allocations: 4086)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-06-29 12:41:57 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/views/recipes/index.html.erb:6
+  [1m[36mRecipe Load (1.0ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 28.6ms | Allocations: 191)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 224.9ms | Allocations: 2665)
+  Rendered layout layouts/standard.html.erb (Duration: 395.3ms | Allocations: 3944)
+Completed 200 OK in 490ms (Views: 471.8ms | ActiveRecord: 2.5ms | Allocations: 4749)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-06-29 12:42:05 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[36mRecipe Load (0.7ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 27)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 108.9ms | Allocations: 1282)
+  Rendered layout layouts/standard.html.erb (Duration: 237.9ms | Allocations: 2241)
+Completed 200 OK in 326ms (Views: 308.0ms | ActiveRecord: 0.7ms | Allocations: 2524)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-06-29 12:44:26 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[36mRecipe Load (0.8ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 84.2ms | Allocations: 192)
+  Rendered recipes/_recipe.html.erb (Duration: 0.3ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 305.4ms | Allocations: 1977)
+  Rendered layout layouts/standard.html.erb (Duration: 452.1ms | Allocations: 3250)
+Completed 200 OK in 489ms (Views: 471.6ms | ActiveRecord: 0.8ms | Allocations: 4066)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-06-29 12:44:34 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[36mRecipe Load (0.7ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 27)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 88.0ms | Allocations: 1303)
+  Rendered layout layouts/standard.html.erb (Duration: 152.9ms | Allocations: 2264)
+Completed 200 OK in 170ms (Views: 163.3ms | ActiveRecord: 0.7ms | Allocations: 2547)
+
+
+Started GET "/recipes/new" for 127.0.0.1 at 2022-06-29 12:44:44 -0400
+Processing by RecipesController#new as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/new.html.erb within layouts/standard
+  Rendered recipes/_form.html.erb (Duration: 27.0ms | Allocations: 1496)
+  Rendered recipes/new.html.erb within layouts/standard (Duration: 97.4ms | Allocations: 1829)
+  Rendered layout layouts/standard.html.erb (Duration: 155.3ms | Allocations: 2785)
+Completed 200 OK in 190ms (Views: 166.4ms | ActiveRecord: 0.0ms | Allocations: 3105)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-06-29 12:44:48 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[36mRecipe Load (7.9ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 27)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.4ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 34.1ms | Allocations: 1320)
+  Rendered layout layouts/standard.html.erb (Duration: 115.8ms | Allocations: 2276)
+Completed 200 OK in 195ms (Views: 170.9ms | ActiveRecord: 7.9ms | Allocations: 2535)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-06-29 12:49:16 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[36mRecipe Load (8.3ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 0.3ms | Allocations: 27)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.3ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 35.9ms | Allocations: 1300)
+  Rendered layout layouts/standard.html.erb (Duration: 166.9ms | Allocations: 2394)
+Completed 200 OK in 183ms (Views: 164.4ms | ActiveRecord: 8.3ms | Allocations: 2655)
+
+
+Started GET "/recipes/new" for 127.0.0.1 at 2022-06-29 12:59:48 -0400
+Processing by RecipesController#new as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/new.html.erb within layouts/standard
+  Rendered recipes/_form.html.erb (Duration: 30.2ms | Allocations: 1065)
+  Rendered recipes/new.html.erb within layouts/standard (Duration: 33.1ms | Allocations: 1173)
+  Rendered layout layouts/standard.html.erb (Duration: 83.1ms | Allocations: 2130)
+Completed 200 OK in 115ms (Views: 98.7ms | Allocations: 2411)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-06-29 12:59:58 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/views/recipes/index.html.erb:6
+  [1m[36mRecipe Load (2.5ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 0.4ms | Allocations: 27)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.4ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 49.1ms | Allocations: 1971)
+  Rendered layout layouts/standard.html.erb (Duration: 112.0ms | Allocations: 2940)
+Completed 200 OK in 134ms (Views: 119.3ms | ActiveRecord: 3.6ms | Allocations: 3197)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-06-29 13:22:53 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/views/recipes/index.html.erb:6
+  [1m[36mRecipe Load (0.9ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 168.1ms | Allocations: 191)
+  Rendered recipes/_recipe.html.erb (Duration: 0.4ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 2.8ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 797.2ms | Allocations: 2686)
+  Rendered layout layouts/standard.html.erb (Duration: 850.0ms | Allocations: 3957)
+Completed 200 OK in 1662ms (Views: 900.3ms | ActiveRecord: 2.9ms | Allocations: 4738)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-06-29 13:27:59 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[36mRecipe Load (0.8ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 33.9ms | Allocations: 191)
+  Rendered recipes/_recipe.html.erb (Duration: 0.5ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 1.4ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 487.6ms | Allocations: 1997)
+  Rendered layout layouts/standard.html.erb (Duration: 1842.5ms | Allocations: 3267)
+Completed 200 OK in 2045ms (Views: 1978.2ms | ActiveRecord: 0.8ms | Allocations: 4080)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-06-29 13:29:41 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[36mRecipe Load (3.1ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 0.4ms | Allocations: 27)
+  Rendered recipes/_recipe.html.erb (Duration: 4.9ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.4ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 213.4ms | Allocations: 1279)
+  Rendered layout layouts/standard.html.erb (Duration: 1396.2ms | Allocations: 3649)
+Completed 200 OK in 1448ms (Views: 1436.2ms | ActiveRecord: 3.1ms | Allocations: 3932)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-06-29 13:30:45 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[36mRecipe Load (10.1ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 0.3ms | Allocations: 27)
+  Rendered recipes/_recipe.html.erb (Duration: 1.7ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.3ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 441.3ms | Allocations: 1295)
+  Rendered layout layouts/standard.html.erb (Duration: 1153.0ms | Allocations: 3507)
+Completed 200 OK in 1254ms (Views: 1229.6ms | ActiveRecord: 10.1ms | Allocations: 3766)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-07-01 10:21:24 -0400
+  [1m[35m (53.9ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[36mRecipe Load (0.9ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 3.2ms | Allocations: 270)
+  Rendered recipes/_recipe.html.erb (Duration: 22.3ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 250.7ms | Allocations: 6508)
+  Rendered layout layouts/standard.html.erb (Duration: 2308.6ms | Allocations: 36245)
+Completed 200 OK in 2538ms (Views: 2354.2ms | ActiveRecord: 4.8ms | Allocations: 40249)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-07-01 10:21:50 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[36mRecipe Load (0.9ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 14.9ms | Allocations: 191)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 229.9ms | Allocations: 2030)
+  Rendered layout layouts/standard.html.erb (Duration: 300.9ms | Allocations: 3296)
+Completed 200 OK in 407ms (Views: 395.7ms | ActiveRecord: 0.9ms | Allocations: 4150)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-07-01 10:52:07 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/views/recipes/index.html.erb:6
+  [1m[36mRecipe Load (12.1ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 3.4ms | Allocations: 191)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.3ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 109.0ms | Allocations: 2768)
+  Rendered layout layouts/standard.html.erb (Duration: 148.8ms | Allocations: 4035)
+Completed 200 OK in 205ms (Views: 184.7ms | ActiveRecord: 13.9ms | Allocations: 4851)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-07-01 10:53:08 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[36mRecipe Load (4.1ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 8.6ms | Allocations: 191)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 68.0ms | Allocations: 2029)
+  Rendered layout layouts/standard.html.erb (Duration: 103.5ms | Allocations: 3294)
+Completed 200 OK in 126ms (Views: 108.1ms | ActiveRecord: 4.1ms | Allocations: 4101)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-07-01 12:12:15 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/views/recipes/index.html.erb:6
+  [1m[36mRecipe Load (0.9ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 25.5ms | Allocations: 191)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 308.4ms | Allocations: 2868)
+  Rendered layout layouts/standard.html.erb (Duration: 508.1ms | Allocations: 5463)
+Completed 200 OK in 557ms (Views: 530.8ms | ActiveRecord: 4.8ms | Allocations: 6265)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-07-01 12:18:21 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/views/recipes/index.html.erb:6
+  [1m[36mRecipe Load (1.1ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 2.6ms | Allocations: 191)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.5ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 50.4ms | Allocations: 2714)
+  Rendered layout layouts/standard.html.erb (Duration: 87.1ms | Allocations: 4007)
+Completed 200 OK in 107ms (Views: 95.4ms | ActiveRecord: 6.3ms | Allocations: 4823)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-07-01 12:19:55 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[36mRecipe Load (0.7ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 2.6ms | Allocations: 191)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.3ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 30.9ms | Allocations: 2029)
+  Rendered layout layouts/standard.html.erb (Duration: 65.3ms | Allocations: 3320)
+Completed 200 OK in 83ms (Views: 73.0ms | ActiveRecord: 0.7ms | Allocations: 4126)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-07-01 12:21:22 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[36mRecipe Load (0.7ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 2.6ms | Allocations: 191)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 46.2ms | Allocations: 2024)
+  Rendered layout layouts/standard.html.erb (Duration: 77.9ms | Allocations: 3316)
+Completed 200 OK in 96ms (Views: 85.2ms | ActiveRecord: 0.7ms | Allocations: 4133)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-07-01 12:23:48 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[36mRecipe Load (0.8ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 2.4ms | Allocations: 191)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 33.1ms | Allocations: 2020)
+  Rendered layout layouts/standard.html.erb (Duration: 68.7ms | Allocations: 3309)
+Completed 200 OK in 90ms (Views: 77.5ms | ActiveRecord: 0.8ms | Allocations: 4115)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-07-01 12:28:09 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[36mRecipe Load (0.8ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 2.3ms | Allocations: 191)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 29.8ms | Allocations: 2026)
+  Rendered layout layouts/standard.html.erb (Duration: 85.4ms | Allocations: 3315)
+Completed 200 OK in 108ms (Views: 96.0ms | ActiveRecord: 0.8ms | Allocations: 4121)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-07-01 12:33:46 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/views/recipes/index.html.erb:6
+  [1m[36mRecipe Load (1.2ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 2.5ms | Allocations: 191)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 42.2ms | Allocations: 2698)
+  Rendered layout layouts/standard.html.erb (Duration: 77.4ms | Allocations: 3995)
+Completed 200 OK in 96ms (Views: 84.6ms | ActiveRecord: 2.6ms | Allocations: 4797)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-07-01 12:33:55 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[36mRecipe Load (0.8ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 27)
+  Rendered recipes/_recipe.html.erb (Duration: 0.3ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.3ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 21.2ms | Allocations: 1342)
+  Rendered layout layouts/standard.html.erb (Duration: 61.7ms | Allocations: 2298)
+Completed 200 OK in 72ms (Views: 65.3ms | ActiveRecord: 0.8ms | Allocations: 2582)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-07-01 12:34:20 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[36mRecipe Load (0.8ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 2.6ms | Allocations: 191)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.6ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 33.7ms | Allocations: 2008)
+  Rendered layout layouts/standard.html.erb (Duration: 87.2ms | Allocations: 3305)
+Completed 200 OK in 114ms (Views: 98.1ms | ActiveRecord: 0.8ms | Allocations: 4090)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-07-01 12:35:04 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[36mRecipe Load (0.8ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 2.6ms | Allocations: 191)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.4ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 30.5ms | Allocations: 2035)
+  Rendered layout layouts/standard.html.erb (Duration: 59.5ms | Allocations: 3327)
+Completed 200 OK in 87ms (Views: 74.3ms | ActiveRecord: 0.8ms | Allocations: 4133)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-07-01 12:35:06 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[36mRecipe Load (0.7ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 27)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.3ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 19.8ms | Allocations: 1315)
+  Rendered layout layouts/standard.html.erb (Duration: 48.0ms | Allocations: 2271)
+Completed 200 OK in 61ms (Views: 51.5ms | ActiveRecord: 0.7ms | Allocations: 2553)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-07-01 12:38:53 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[36mRecipe Load (1.5ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 80.1ms | Allocations: 191)
+  Rendered recipes/_recipe.html.erb (Duration: 0.4ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.7ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 668.2ms | Allocations: 2033)
+  Rendered layout layouts/standard.html.erb (Duration: 785.0ms | Allocations: 3323)
+Completed 200 OK in 1028ms (Views: 994.6ms | ActiveRecord: 1.5ms | Allocations: 4106)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-07-01 12:39:01 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[36mRecipe Load (1.4ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 0.4ms | Allocations: 27)
+  Rendered recipes/_recipe.html.erb (Duration: 2.4ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.5ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 77.9ms | Allocations: 1312)
+  Rendered layout layouts/standard.html.erb (Duration: 158.4ms | Allocations: 2273)
+Completed 200 OK in 203ms (Views: 184.5ms | ActiveRecord: 1.4ms | Allocations: 2557)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-07-01 12:41:27 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[36mRecipe Load (0.8ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 3.1ms | Allocations: 191)
+  Rendered recipes/_recipe.html.erb (Duration: 0.5ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 33.0ms | Allocations: 2022)
+  Rendered layout layouts/standard.html.erb (Duration: 93.9ms | Allocations: 3312)
+Completed 200 OK in 127ms (Views: 111.9ms | ActiveRecord: 0.8ms | Allocations: 4128)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-07-01 12:43:19 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[36mRecipe Load (3.7ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 3.6ms | Allocations: 191)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.4ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 30.0ms | Allocations: 2032)
+  Rendered layout layouts/standard.html.erb (Duration: 63.4ms | Allocations: 3325)
+Completed 200 OK in 100ms (Views: 82.1ms | ActiveRecord: 3.7ms | Allocations: 4131)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-07-01 12:54:15 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/views/recipes/index.html.erb:6
+  [1m[36mRecipe Load (1.5ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 0.7ms | Allocations: 27)
+  Rendered recipes/_recipe.html.erb (Duration: 0.5ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.7ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 56.8ms | Allocations: 2001)
+  Rendered layout layouts/standard.html.erb (Duration: 301.7ms | Allocations: 4336)
+Completed 200 OK in 317ms (Views: 307.0ms | ActiveRecord: 3.1ms | Allocations: 4616)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-07-01 12:54:28 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[36mRecipe Load (0.7ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 27)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.4ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 49.8ms | Allocations: 1328)
+  Rendered layout layouts/standard.html.erb (Duration: 77.4ms | Allocations: 2284)
+Completed 200 OK in 93ms (Views: 83.8ms | ActiveRecord: 0.7ms | Allocations: 2544)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-07-01 12:55:23 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[36mRecipe Load (2.6ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 27)
+  Rendered recipes/_recipe.html.erb (Duration: 1.9ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.4ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 65.6ms | Allocations: 1321)
+  Rendered layout layouts/standard.html.erb (Duration: 278.3ms | Allocations: 3536)
+Completed 200 OK in 298ms (Views: 286.2ms | ActiveRecord: 2.6ms | Allocations: 3795)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-07-01 12:55:53 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[36mRecipe Load (2.1ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 2.3ms | Allocations: 191)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.6ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 37.1ms | Allocations: 2024)
+  Rendered layout layouts/standard.html.erb (Duration: 69.3ms | Allocations: 3320)
+Completed 200 OK in 95ms (Views: 78.4ms | ActiveRecord: 2.1ms | Allocations: 4103)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-07-01 13:03:22 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/views/recipes/index.html.erb:6
+  [1m[36mRecipe Load (1.8ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 27)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.3ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 296.8ms | Allocations: 2004)
+  Rendered layout layouts/standard.html.erb (Duration: 683.5ms | Allocations: 2960)
+Completed 200 OK in 702ms (Views: 693.1ms | ActiveRecord: 3.2ms | Allocations: 3240)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-07-01 13:46:42 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/views/recipes/index.html.erb:7
+  [1m[36mRecipe Load (0.9ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:7
+  Rendered recipes/_recipe.html.erb (Duration: 159.1ms | Allocations: 160)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 19)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 19)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 2617.8ms | Allocations: 2710)
+  Rendered layout layouts/standard.html.erb (Duration: 3117.5ms | Allocations: 4009)
+Completed 200 OK in 6352ms (Views: 4046.6ms | ActiveRecord: 64.1ms | Allocations: 4795)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-07-01 13:47:03 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[36mRecipe Load (0.9ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:7
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 20)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 19)
+  Rendered recipes/_recipe.html.erb (Duration: 0.3ms | Allocations: 19)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 188.5ms | Allocations: 1332)
+  Rendered layout layouts/standard.html.erb (Duration: 236.9ms | Allocations: 2288)
+Completed 200 OK in 421ms (Views: 243.0ms | ActiveRecord: 0.9ms | Allocations: 2571)
+
+
+Started GET "/recipes/1" for 127.0.0.1 at 2022-07-01 13:47:12 -0400
+Processing by RecipesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mRecipe Load (1319.7ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:64:in `set_recipe'
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/show.html.erb within layouts/standard
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 24)
+  Rendered recipes/show.html.erb within layouts/standard (Duration: 389.2ms | Allocations: 1120)
+  Rendered layout layouts/standard.html.erb (Duration: 420.3ms | Allocations: 2163)
+Completed 200 OK in 8949ms (Views: 427.3ms | ActiveRecord: 1319.7ms | Allocations: 10639)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-07-01 13:47:48 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[36mRecipe Load (0.7ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:7
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 20)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 19)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 19)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 48.5ms | Allocations: 1342)
+  Rendered layout layouts/standard.html.erb (Duration: 95.2ms | Allocations: 2299)
+Completed 200 OK in 266ms (Views: 252.2ms | ActiveRecord: 0.7ms | Allocations: 2586)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-07-01 19:36:16 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[35m (22.8ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/views/recipes/index.html.erb:7
+  [1m[36mRecipe Load (0.8ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:7
+  Rendered recipes/_recipe.html.erb (Duration: 149.4ms | Allocations: 191)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.5ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 1107.2ms | Allocations: 2737)
+  Rendered layout layouts/standard.html.erb (Duration: 1482.1ms | Allocations: 4032)
+Completed 200 OK in 2030ms (Views: 1809.2ms | ActiveRecord: 52.9ms | Allocations: 4812)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-07-01 19:37:16 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 100.8ms | Allocations: 502)
+  Rendered layout layouts/standard.html.erb (Duration: 265.5ms | Allocations: 1814)
+Completed 200 OK in 453ms (Views: 443.1ms | ActiveRecord: 0.0ms | Allocations: 2652)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-07-01 19:37:56 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[36mRecipe Load (0.7ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 59.1ms | Allocations: 194)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.2ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 3684.2ms | Allocations: 2044)
+  Rendered layout layouts/standard.html.erb (Duration: 3870.0ms | Allocations: 3344)
+Completed 200 OK in 3929ms (Views: 3909.7ms | ActiveRecord: 0.7ms | Allocations: 4151)
+
+
+Started GET "/recipes" for 127.0.0.1 at 2022-07-03 01:06:19 -0400
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/standard.html.erb
+  Rendering recipes/index.html.erb within layouts/standard
+  [1m[35m (38.6ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/views/recipes/index.html.erb:6
+  [1m[36mRecipe Load (2.4ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/views/recipes/index.html.erb:6
+  Rendered recipes/_recipe.html.erb (Duration: 78.9ms | Allocations: 191)
+  Rendered recipes/_recipe.html.erb (Duration: 0.4ms | Allocations: 26)
+  Rendered recipes/_recipe.html.erb (Duration: 0.3ms | Allocations: 27)
+  Rendered recipes/index.html.erb within layouts/standard (Duration: 6022.4ms | Allocations: 2710)
+  Rendered layout layouts/standard.html.erb (Duration: 6957.3ms | Allocations: 4014)
+Completed 200 OK in 10673ms (Views: 9212.1ms | ActiveRecord: 299.2ms | Allocations: 4828)
+
+
